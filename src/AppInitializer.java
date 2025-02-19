@@ -198,13 +198,13 @@ public class AppInitializer {
                     saveCustomer();
                     break;
                 case 2:
-                    //Find customer
+                    findCustomer();
                     break;
                 case 3:
-                    //Update Customer
+                    updateCustomer();
                     break;
                 case 4:
-                    //Delete Customer
+                    deleteCustomer();
                     break;
                 case 5:
                     //Find all Customers
@@ -229,13 +229,13 @@ public class AppInitializer {
         double salary;
 
         while (true){
-            System.out.println("Please enter customer NIC number: ");
+            System.out.println("Please enter Customer NIC number: ");
             nic = input.nextLine();
-            System.out.println("Please enter customer Name: ");
+            System.out.println("Please enter Customer Name: ");
             name = input.nextLine();
-            System.out.println("Please enter customer Address: ");
+            System.out.println("Please enter Customer Address: ");
             address = input.nextLine();
-            System.out.println("Please enter customer Salary: ");
+            System.out.println("Please enter Customer Salary: ");
             salary = input.nextDouble();
 
 
@@ -257,7 +257,8 @@ public class AppInitializer {
 
                 System.out.println("Customer saved Successfully...!\n");
                 System.out.println(" 1) Do you want to save another customer? ");
-                System.out.println(" 2) Back to Dashboard");
+                System.out.println(" 2) Back to Customer Manage ");
+                System.out.println(" 3) Back to Dashboard ");
                 int option = input.nextInt();
 
                 switch (option) {
@@ -265,6 +266,9 @@ public class AppInitializer {
                         saveCustomer();
                         break;
                     case 2:
+                        customerManage();
+                        break;
+                    case 3:
                         dashboard();
                         break;
                     default:
@@ -275,5 +279,102 @@ public class AppInitializer {
 
             }
         }
+    }
+
+    //Find customer
+    public static void findCustomer() {
+        printData("Find Customer \n");
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Please enter Customer NIC number: ");
+        String nic = input.nextLine();
+
+        for (int i = 0; i < customer.length; i++) {
+            if (customer[i][0] != null) {
+                if (customer[i][0].equalsIgnoreCase(nic)) {
+                    System.out.println("===Customer Details===\n");
+                    System.out.println("Customer NIC Number: " + customer[i][0]);
+                    System.out.println("Customer Name: " + customer[i][1]);
+                    System.out.println("Customer Address: " + customer[i][2]);
+                    System.out.println("Customer Salary: " + customer[i][3]+"\n");
+                    System.out.println("===Customer Details End===\n");
+                    return;
+                }
+            }
+        }
+        System.out.println("Customer Not Found!\n");
+    }
+
+    //Update Customer
+    public static void updateCustomer() {
+        printData("Update Customer \n");
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Please enter Customer NIC number: ");
+        String nic = input.nextLine();
+
+        for (int i = 0; i < customer.length; i++) {
+            if (customer[i][0] != null) {
+                if (customer[i][0].equalsIgnoreCase(nic)) {
+                    String newName, newAddress;
+                    double newSalary;
+
+                    System.out.println("Please enter New Customer's new Name : ");
+                    newName = input.nextLine();
+                    customer[i][1] = newName;
+
+                    System.out.println("Please enter New Customer's new Address : ");
+                    newAddress = input.nextLine();
+                    customer[i][2] = newAddress;
+
+                    System.out.println("Please enter New Customer's new Salary : ");
+                    newSalary = input.nextDouble();
+                    customer[i][3] = String.valueOf(newSalary);
+
+                    System.out.println("Customer updated Successfully...!\n");
+                    return;
+                }
+            }
+        }
+        System.out.println("Customer Not Found...!\n");
+    }
+
+    //Delete Customer
+    public static void deleteCustomer() {
+        printData("Delete Customer \n");
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Please enter Customer NIC number: ");
+        String nic = input.nextLine();
+
+        for (int i = 0; i < customer.length; i++) {
+            if (customer[i][0] != null) {
+                if (customer[i][0].equalsIgnoreCase(nic)) {
+                    customer[i][0] = null;
+                    customer[i][1] = null;
+                    customer[i][2] = null;
+                    customer[i][3] = null;
+
+                    System.out.println("Customer Deleted Successfully...!\n");
+                    return;
+                }
+            }
+        }
+        System.out.println("Customer Not Found...!\n");
+    }
+
+    //find all customers
+    public static void findCustomers() {
+        printData("Find Customer \n");
+
+         for (int i = 0; i < customer.length; i++) {
+             System.out.println("Customer's NIC : " + customer[i][0]);
+             System.out.println("Customer's Name : " + customer[i][1]);
+             System.out.println("Customer's Address : " + customer[i][2]);
+             System.out.println("Customer's Salary : " + customer[i][3]+"\n");
+         }
     }
 }
